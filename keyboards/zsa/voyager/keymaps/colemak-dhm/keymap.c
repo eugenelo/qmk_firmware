@@ -4,6 +4,9 @@
 
 #include QMK_KEYBOARD_H
 
+#define KC_BACK LCTL(KC_Z)
+#define KC_FWRD LCTL(KC_Y)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Colemak-DHm
     [0] = LAYOUT(
@@ -26,15 +29,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RM_TOGG, RM_NEXT, RM_PREV, RM_VALU, RM_VALD, _______,                      _______, _______, _______, _______, _______, KC_DEL,
         LWIN(KC_TAB), _______, _______, LWIN(KC_E), _______, LWIN(KC_T),           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______,
         _______, _______, _______, LWIN(KC_D), LWIN(KC_F), LWIN(KC_G),             KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
-        _______, KC_UNDO, KC_CUT, KC_COPY, KC_UNDO, KC_PASTE,                      LWIN(KC_LEFT), LWIN(KC_DOWN), LWIN(KC_UP), LWIN(KC_RGHT), _______, QK_BOOT,
-                                                     _______, LWIN(KC_ENT),    _______, _______
+        _______, KC_BACK, KC_CUT, KC_COPY, KC_FWRD, KC_PASTE,                      LWIN(KC_LEFT), LWIN(KC_DOWN), LWIN(KC_UP), LWIN(KC_RGHT), _______, QK_BOOT,
+                                                     _______, _______,    _______, _______
     ),
     // Sym
     [3] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
-        _______, KC_GRV,  KC_TILD, KC_HASH, KC_AMPR, KC_PIPE,                      KC_CIRC, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, _______,
-        _______, KC_EXLM, KC_UNDS, KC_COLN, KC_EQL,  KC_DLR,                       KC_AT,   KC_LPRN, KC_RPRN, KC_UNDS, KC_SCLN, _______,
-        _______, KC_PERC, KC_QUES, KC_ASTR, KC_PLUS, KC_BSLS,                      KC_SLSH, KC_MINS, KC_LT,   KC_GT,   KC_DQT,  _______,
+        _______, KC_GRV,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                      KC_CIRC, KC_AMPR, KC_PIPE, KC_LCBR, KC_RCBR, _______,
+        _______, KC_EXLM, KC_MINS, KC_UNDS, KC_EQL,  KC_COLN,                      KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, KC_SCLN, _______,
+        _______, _______, KC_ASTR, KC_PLUS, _______, KC_BSLS,                      KC_SLSH, _______, KC_LT,   KC_GT,   KC_QUES,  _______,
                                                      _______, _______,    _______, _______
     ),
 };
+
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(1, KC_ENT):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        case LT(2, KC_BSPC):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        case LALT_T(KC_TAB):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
