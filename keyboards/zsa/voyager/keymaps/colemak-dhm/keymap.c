@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RM_TOGG, RM_NEXT, RM_PREV, RM_VALU, RM_VALD, _______,                      _______, _______, _______, _______, _______, KC_DEL,
         LWIN(KC_TAB), _______, _______, LWIN(KC_E), _______, LWIN(KC_T),           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______,
         _______, _______, _______, LWIN(KC_D), LWIN(KC_F), LWIN(KC_G),             KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
-        _______, KC_UNDO, KC_CUT, KC_COPY, _______, KC_PASTE,                      LWIN(KC_LEFT), LWIN(KC_DOWN), LWIN(KC_UP), LWIN(KC_RGHT), _______, QK_BOOT,
+        _______, KC_UNDO, KC_CUT, KC_COPY, KC_UNDO, KC_PASTE,                      LWIN(KC_LEFT), LWIN(KC_DOWN), LWIN(KC_UP), LWIN(KC_RGHT), _______, QK_BOOT,
                                                      _______, LWIN(KC_ENT),    _______, _______
     ),
     // Sym
